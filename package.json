@@ -1,5 +1,5 @@
 {
-	"name": "hoalu",
+	"name": "math-dashboard",
 	"private": true,
 	"workspaces": {
 		"packages": [
