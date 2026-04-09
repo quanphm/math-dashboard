@@ -25,10 +25,6 @@ bun run format:check      # oxfmt --check .
 
 # Build all packages
 bun run build
-
-# Database operations (in apps/api/)
-bun run db:generate       # Generate migrations
-bun run db:migrate        # Run migrations
 ```
 
 ### Monorepo Structure
@@ -101,139 +97,6 @@ Use `"catalog:"` in package.json to reference:
 }
 ```
 
-## API App (@math/api)
-
-### Stack
-- **Framework:** Hono
-- **ORM:** Drizzle ORM with PostgreSQL
-- **Auth:** Better Auth (with Drizzle adapter)
-- **Cache:** Redis (ioredis)
-- **Validation:** Zod + @hono/zod-validator
-- **Docs:** OpenAPI (hono-openapi + Scalar)
-
-### Path Alias
-```json
-{
-  "imports": {
-    "#api/*": "./src/*"
-  }
-}
-```
-
-### Database
-- Schema defined in `src/db/schema.ts`
-- Migrations in `./migrations/`
-- Drizzle config in `drizzle.config.ts`
-
-### Better Auth Configuration
-- **Server config:** `src/lib/auth.ts`
-- **Middleware:** `src/middlewares/user-session.ts` - attaches user/session to context
-- **Routes:** `src/modules/auth.ts` - mounts auth handlers at `/api/auth/*`
-- **Tables:** user, session, account, verification (in schema.ts)
-
-### Environment Variables
-Required in `apps/api/.env`:
-```
-AUTH_SECRET=<32-char-secret>
-AUTH_URL=http://localhost:4000
-PUBLIC_API_URL=http://localhost:4000
-# Database credentials...
-```
-
-### Scripts
-```bash
-cd apps/api
-bun run dev               # Start dev server with watch
-bun run db:generate       # Generate Drizzle migrations
-bun run db:migrate        # Run pending migrations
-bun run auth:migrate      # Generate Better Auth schema (if needed)
-bun run build             # Build for production
-```
-
-## Dashboard App (@math/dashboard)
-
-### Stack
-- **Framework:** Vite + React 19
-- **Router:** TanStack Router (file-based routing)
-- **State:** TanStack Query (React Query)
-- **Forms:** TanStack Form
-- **Auth:** Better Auth (React client)
-- **DevTools:** TanStack Router Devtools, React Query Devtools
-
-### File-based Routing
-Routes are defined by files in `src/routes/`:
-- `src/routes/__root.tsx` - Root layout
-- `src/routes/index.tsx` - Home page (`/`)
-- `src/routes/about.tsx` - About page (`/about`)
-
-The `routeTree.gen.ts` is auto-generated - do not edit manually.
-
-### Query Client Configuration
-Located in `src/lib/query-client.ts`:
-- `staleTime: 86_400_000` (24 hours)
-- `refetchOnWindowFocus: true`
-- `retry: 2`
-
-### Path Alias
-```json
-{
-  "imports": {
-    "#app/*": "./src/*"
-  }
-}
-```
-
-### Better Auth Client
-Located in `src/lib/auth-client.ts`:
-```typescript
-import { useSession, signIn, signOut, signUp } from "#app/lib/auth-client.ts";
-
-// Use in components
-const { data: session } = useSession();
-```
-
-### Adding New Routes
-1. Create file in `src/routes/` following TanStack Router conventions
-2. Dev server will auto-generate `routeTree.gen.ts`
-3. Import from `#app/routes/[file]` if needed
-
-## UI Package (@math/ui)
-
-- **Style:** Base UI + shadcn/ui (base-lyra theme)
-- **Exports:**
-  - `@math/ui/components/*` - UI components
-  - `@math/ui/lib/*` - Utilities (cn, etc.)
-  - `@math/ui/globals.css` - Global styles
-  - `@math/ui/hooks/*` - Hooks (use-mobile)
-- **Current components:** button, input, separator, sheet, sidebar, skeleton, sonner, tooltip
-
-### Adding Components
-```bash
-cd packages/ui && npx shadcn add <component>
-```
-
-## Common Package (@math/common)
-
-Shared utilities for the monorepo.
-
-### Path Alias
-```json
-{
-  "imports": {
-    "#common/*": "./src/*"
-  }
-}
-```
-
-### Exports
-- `@math/common/http-status` - HTTP status codes and reason phrases
-- `@math/common/generate-id` - ID generation utilities
-- `@math/common/io` - I/O utilities
-- `@math/common/slugify` - Slug generation
-- `@math/common/standard-validate` - Standard schema validation
-- `@math/common/datetime` - Date/time utilities
-- `@math/common/noop` - No-op function
-
 ## Current State
 
 - **apps/api/** - Initialized with Hono + Drizzle ORM + Better Auth
@@ -253,3 +116,7 @@ Shared utilities for the monorepo.
 ```
 
 Run with: `turbo run <task> --filter=<package>`
+
+---
+
+*For app-specific and package-specific instructions, see the respective `AGENTS.md` files in `apps/*/` and `packages/*/` directories.*
