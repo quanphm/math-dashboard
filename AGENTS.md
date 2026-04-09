@@ -106,7 +106,7 @@ Use `"catalog:"` in package.json to reference:
 ### Stack
 - **Framework:** Hono
 - **ORM:** Drizzle ORM with PostgreSQL
-- **Auth:** Better Auth
+- **Auth:** Better Auth (with Drizzle adapter)
 - **Cache:** Redis (ioredis)
 - **Validation:** Zod + @hono/zod-validator
 - **Docs:** OpenAPI (hono-openapi + Scalar)
@@ -125,12 +125,28 @@ Use `"catalog:"` in package.json to reference:
 - Migrations in `./migrations/`
 - Drizzle config in `drizzle.config.ts`
 
+### Better Auth Configuration
+- **Server config:** `src/lib/auth.ts`
+- **Middleware:** `src/middlewares/user-session.ts` - attaches user/session to context
+- **Routes:** `src/modules/auth.ts` - mounts auth handlers at `/api/auth/*`
+- **Tables:** user, session, account, verification (in schema.ts)
+
+### Environment Variables
+Required in `apps/api/.env`:
+```
+AUTH_SECRET=<32-char-secret>
+AUTH_URL=http://localhost:4000
+PUBLIC_API_URL=http://localhost:4000
+# Database credentials...
+```
+
 ### Scripts
 ```bash
 cd apps/api
 bun run dev               # Start dev server with watch
 bun run db:generate       # Generate Drizzle migrations
 bun run db:migrate        # Run pending migrations
+bun run auth:migrate      # Generate Better Auth schema (if needed)
 bun run build             # Build for production
 ```
 
@@ -141,6 +157,7 @@ bun run build             # Build for production
 - **Router:** TanStack Router (file-based routing)
 - **State:** TanStack Query (React Query)
 - **Forms:** TanStack Form
+- **Auth:** Better Auth (React client)
 - **DevTools:** TanStack Router Devtools, React Query Devtools
 
 ### File-based Routing
@@ -164,6 +181,15 @@ Located in `src/lib/query-client.ts`:
     "#app/*": "./src/*"
   }
 }
+```
+
+### Better Auth Client
+Located in `src/lib/auth-client.ts`:
+```typescript
+import { useSession, signIn, signOut, signUp } from "#app/lib/auth-client.ts";
+
+// Use in components
+const { data: session } = useSession();
 ```
 
 ### Adding New Routes

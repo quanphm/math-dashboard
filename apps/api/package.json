@@ -19,7 +19,8 @@
 		"clean": "rimraf -rf dist",
 		"dev": "bun --watch src/index.ts",
 		"db:generate": "drizzle-kit generate",
-		"db:migrate": "drizzle-kit migrate"
+		"db:migrate": "drizzle-kit migrate",
+		"auth:migrate": "npx @better-auth/cli migrate"
 	},
 	"dependencies": {
 		"@hono/standard-validator": "^0.2.2",

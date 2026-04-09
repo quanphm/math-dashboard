@@ -11,10 +11,11 @@ const apiRoute = apiModule();
 
 openAPIModule(app);
 
-app.use(userSession);
-// .route("/", authRoute)
-// .route("/", apiRoute)
-// import type { ApiRoutes } from "#api/modules/api.ts";
+app.use(userSession)
+	.route("/", authRoute)
+	.route("/", apiRoute);
+
+import type { ApiRoutes } from "#api/modules/api.ts";
 
 export default {
 	port: 4000,
