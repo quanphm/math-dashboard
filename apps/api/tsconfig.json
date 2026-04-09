@@ -1,0 +1,10 @@
+{
+	"extends": "@math/tsconfig/bun.json",
+	"compilerOptions": {
+		"rootDir": "./src",
+		"strict": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
+	},
+	"include": ["src"]
+}

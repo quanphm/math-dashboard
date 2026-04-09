@@ -1,0 +1,5 @@
+{
+	"extends": "@math/tsconfig/vite.json",
+	"files": [],
+	"references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.bun.json" }]
+}

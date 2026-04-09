@@ -1,0 +1,14 @@
+{
+	"extends": "@math/tsconfig/vite.json",
+	"compilerOptions": {
+		"rootDir": "./src",
+		"strict": true,
+		"exactOptionalPropertyTypes": false,
+		"skipLibCheck": true,
+		"declaration": false,
+		"declarationMap": false,
+		"jsx": "react-jsx",
+		"allowJs": true
+	},
+	"include": ["src"]
+}
