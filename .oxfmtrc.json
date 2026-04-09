@@ -1,0 +1,35 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"useTabs": true,
+	"tabWidth": 2,
+	"printWidth": 100,
+	"singleQuote": false,
+	"jsxSingleQuote": false,
+	"quoteProps": "as-needed",
+	"trailingComma": "all",
+	"semi": true,
+	"arrowParens": "always",
+	"bracketSameLine": false,
+	"bracketSpacing": true,
+	"sortImports": {
+		"newlinesBetween": true,
+		"partitionByComment": true,
+		"customGroups": [
+			{
+				"groupName": "tanstack",
+				"elementNamePattern": ["@tanstack", "@tanstack/**"]
+			}
+		],
+		"groups": [
+			["value-builtin", "tanstack", "value-external"],
+			["value-internal"],
+			["value-parent", "value-sibling", "value-index"],
+			"unknown"
+		]
+	},
+	"sortTailwindcss": {
+		"attributes": ["class", "className"],
+		"functions": ["cn", "clsx", "cva"]
+	},
+	"ignorePatterns": ["**/src/routeTree.gen.ts"]
+}

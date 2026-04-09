@@ -1,0 +1,39 @@
+# dependencies
+node_modules
+
+build
+dist
+dist-ssr
+dev-dist
+out
+pg-data
+.output
+.wrangler
+.dev.vars
+.turbo
+.next
+.tanstack
+.react-email
+
+# Tauri
+*.local
+**/src-tauri/target/
+
+# debug
+npm-debug.log*
+.pnpm-debug.log*
+
+# local env files
+.env
+.env.*
+.sql
+!.env.template
+!.env.example
+
+# misc
+.DS_Store
+*.pem
+
+# playwriter
+tmp
+
