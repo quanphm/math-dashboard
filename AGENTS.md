@@ -4,7 +4,7 @@ LAST_UPDATED: 2026-04-10
 TECH_STACK: Bun, Turborepo, React 19, Hono, Drizzle ORM, TanStack Router, TanStack Query, Vite, OXC
 ---
 
-# AGENTS.md
+# Math Dashboard
 
 ## Quick Reference
 
