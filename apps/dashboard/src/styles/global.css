@@ -1,0 +1,19 @@
+@import "@math/ui/globals.css";
+@import "./typography.css";
+
+@source "../../../../packages/ui/**/*.{ts,tsx}";
+
+#root {
+	isolation: isolate;
+}
+
+@layer base {
+	html,
+	body {
+		@apply min-h-screen w-full;
+	}
+
+	body {
+		@apply relative;
+	}
+}

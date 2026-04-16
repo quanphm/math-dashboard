@@ -3,7 +3,9 @@
     "allow": [
       "Bash(ln -s AGENTS.md CLAUDE.md)",
       "Bash(rmdir .claude/skills)",
-      "Bash(ln -s ../.agents/skills .claude/skills)"
+      "Bash(ln -s ../.agents/skills .claude/skills)",
+      "Bash(bun add:*)",
+      "Bash(bun remove:*)"
     ]
   }
 }
