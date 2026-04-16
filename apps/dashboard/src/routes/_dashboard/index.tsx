@@ -1,3 +1,4 @@
+import { StudentDashboard } from "#app/components/student-dashboard/student-dashboard.tsx";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -26,14 +27,7 @@ function RouteComponent() {
 					</BreadcrumbList>
 				</Breadcrumb>
 			</header>
-			<div className="flex flex-1 flex-col gap-4 p-4">
-				<div className="grid auto-rows-min gap-4 md:grid-cols-3">
-					<div className="bg-muted/50 aspect-video rounded-none" />
-					<div className="bg-muted/50 aspect-video rounded-none" />
-					<div className="bg-muted/50 aspect-video rounded-none" />
-				</div>
-				<div className="bg-muted/50 min-h-screen flex-1 rounded-none md:min-h-min" />
-			</div>
+			<StudentDashboard />
 		</>
 	);
 }

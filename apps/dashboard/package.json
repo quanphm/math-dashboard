@@ -13,6 +13,8 @@
 	},
 	"dependencies": {
 		"@math/ui": "workspace:*",
+		"@nivo/core": "^0.99.0",
+		"@nivo/sankey": "^0.99.0",
 		"@tanstack/devtools-vite": "^0.6.0",
 		"@tanstack/query-db-collection": "^1.0.27",
 		"@tanstack/react-db": "^0.1.74",
