@@ -5,6 +5,7 @@ build
 dist
 dist-ssr
 dev-dist
+vite-test
 out
 pg-data
 .output

@@ -1,5 +1,4 @@
 @import "@math/ui/globals.css";
-@import "./typography.css";
 
 @source "../../../../packages/ui/**/*.{ts,tsx}";
 

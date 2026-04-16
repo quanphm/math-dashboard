@@ -5,6 +5,7 @@ import { Button } from "@math/ui/components/button";
 import { Input } from "@math/ui/components/input";
 import { Label } from "@math/ui/components/label";
 import { useForm } from "@tanstack/react-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
@@ -27,6 +28,7 @@ const loginSchema = z.object({
 
 function RouteComponent() {
 	const router = useRouter();
+	const queryClient = useQueryClient();
 	const [serverError, setServerError] = useState<string | null>(null);
 
 	const form = useForm({
@@ -46,6 +48,8 @@ function RouteComponent() {
 				return;
 			}
 
+			await queryClient.invalidateQueries({ queryKey: sessionQueryOptions.queryKey });
+			await router.invalidate();
 			await router.navigate({ to: "/" });
 		},
 	});

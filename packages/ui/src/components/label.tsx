@@ -1,3 +1,4 @@
+// oxlint-disable jsx_a11y/label-has-associated-control
 import { cn } from "@math/ui/lib/utils";
 import * as React from "react";
 

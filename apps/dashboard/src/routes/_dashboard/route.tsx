@@ -1,4 +1,6 @@
+import { AppSidebar } from "#app/components/layouts/app-sidebar.tsx";
 import { sessionQueryOptions } from "#app/lib/queries/auth.ts";
+import { SidebarInset, SidebarProvider } from "@math/ui/components/sidebar";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_dashboard")({
@@ -18,5 +20,12 @@ export const Route = createFileRoute("/_dashboard")({
 });
 
 function RouteComponent() {
-	return <Outlet />;
+	return (
+		<SidebarProvider>
+			<AppSidebar />
+			<SidebarInset>
+				<Outlet />
+			</SidebarInset>
+		</SidebarProvider>
+	);
 }
