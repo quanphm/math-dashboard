@@ -1,13 +1,13 @@
-import type { SankeyNodeDatum, SankeyLinkDatum } from "@nivo/sankey";
 import { ResponsiveSankey } from "@nivo/sankey";
+
+import type { SankeyNodeDatum, SankeyLinkDatum } from "@nivo/sankey";
 
 export type SankeyNode = { id: string; nodeColor: string };
 export type SankeyLink = { source: string; target: string; value: number };
 
-// Shared tooltip shell — matches shadcn Card style using theme CSS variables.
 function TooltipShell({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="pointer-events-none z-50 rounded-lg border border-border bg-card px-3 py-2 shadow-md">
+		<div className="border-border bg-card pointer-events-none z-50 min-w-max rounded-lg border px-3 py-2 shadow-md">
 			{children}
 		</div>
 	);
@@ -16,29 +16,21 @@ function TooltipShell({ children }: { children: React.ReactNode }) {
 function NodeTooltip({ node }: { node: SankeyNodeDatum<SankeyNode, SankeyLink> }) {
 	return (
 		<TooltipShell>
-			<div className="flex items-center gap-2">
-				<span
-					className="size-2.5 shrink-0 rounded-sm"
-					style={{ backgroundColor: node.color }}
-				/>
-				<span className="text-sm font-medium text-card-foreground">{node.id}</span>
+			<div className="flex items-center gap-2 text-xs">
+				<span className="size-2.5 shrink-0 rounded-sm" style={{ backgroundColor: node.color }} />
+				<span className="text-card-foreground">{node.id}</span>
 			</div>
-			<p className="mt-1 text-xs text-muted-foreground">
-				Số sinh viên:{" "}
-				<span className="font-semibold text-card-foreground">{node.value}</span>
+			<p className="text-muted-foreground mt-1 text-xs">
+				Số sinh viên: <span className="text-card-foreground font-semibold">{node.value}</span>
 			</p>
 		</TooltipShell>
 	);
 }
 
-function LinkTooltip({
-	link,
-}: {
-	link: SankeyLinkDatum<SankeyNode, SankeyLink>;
-}) {
+function LinkTooltip({ link }: { link: SankeyLinkDatum<SankeyNode, SankeyLink> }) {
 	return (
 		<TooltipShell>
-			<div className="flex items-center gap-1.5 text-sm font-medium text-card-foreground">
+			<div className="text-card-foreground flex items-center gap-1 text-xs">
 				<span
 					className="size-2 shrink-0 rounded-sm"
 					style={{ backgroundColor: link.source.color }}
@@ -51,9 +43,8 @@ function LinkTooltip({
 				/>
 				<span>{link.target.id}</span>
 			</div>
-			<p className="mt-1 text-xs text-muted-foreground">
-				Số sinh viên:{" "}
-				<span className="font-semibold text-card-foreground">{link.value}</span>
+			<p className="text-muted-foreground mt-1 text-xs">
+				Số sinh viên: <span className="text-card-foreground font-semibold">{link.value}</span>
 			</p>
 		</TooltipShell>
 	);
@@ -67,10 +58,10 @@ type SankeyChartProps = {
 
 export function SankeyChart({ nodes, links, height = 440 }: SankeyChartProps) {
 	return (
-		<div style={{ height }}>
+		<div style={{ height }} className="relative overflow-hidden">
 			<ResponsiveSankey
 				data={{ nodes, links }}
-				margin={{ top: 8, right: 160, bottom: 8, left: 8 }}
+				margin={{ top: 8, right: 24, bottom: 8, left: 24 }}
 				align="justify"
 				colors={{ datum: "nodeColor" }}
 				nodeOpacity={1}
@@ -84,7 +75,7 @@ export function SankeyChart({ nodes, links, height = 440 }: SankeyChartProps) {
 				linkHoverOthersOpacity={0.15}
 				linkContract={2}
 				enableLinkGradient
-				labelPosition="outside"
+				labelPosition="inside"
 				labelOrientation="horizontal"
 				labelPadding={10}
 				labelTextColor={{ from: "color", modifiers: [["darker", 1.4]] }}
